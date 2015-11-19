@@ -1,0 +1,18 @@
+---
+
+- hosts: twitterconnector
+  sudo: True
+  tasks:
+
+  - name: install Twitter Connector
+    apt: name=TwitterConnector update_cache=yes state=latest
+    register: package_installed
+
+  - name: ensure the Twitter Connector service is restarted
+    service: name=TwitterConnector state=restarted
+    when: package_installed|changed
+
+  - name: ensure the Twitter Connector service is started
+    service: name=TwitterConnector state=started
+
+
