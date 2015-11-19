@@ -107,7 +107,7 @@
                                 <data>
                                     <type>directory</type>
                                     <src>${basedir}/src/main/config</src>
-                                    <includes/>
+                                    <includes />
                                     <mapper>
                                         <type>perm</type>
                                         <prefix>/var/lib/${artifactId}/config</prefix>
@@ -125,6 +125,9 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
