@@ -3,7 +3,6 @@ Version: [[version]]
 Section: misc
 Priority: optional
 Architecture: all
-Depends: jdk (>= 1.8)
 Maintainer: Arno Broekhof <arnobroekhof@gmail.com>
 Description: TwitterConnector
 Distribution: development
