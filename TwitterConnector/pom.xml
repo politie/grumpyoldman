@@ -117,8 +117,8 @@
                                         <type>perm</type>
                                         <prefix>/var/lib/${artifactId}</prefix>
                                         <filemode>755</filemode>
-                                        <user>root</user>
-                                        <group>root</group>
+                                        <user>twitterconnector</user>
+                                        <group>twitterconnector</group>
                                     </mapper>
                                 </data>
                                 <data>
@@ -136,6 +136,7 @@
                                     <mapper>
                                         <type>perm</type>
                                         <prefix>/var/lib/${artifactId}/config</prefix>
+                                        <filemode>755</filemode>
                                         <user>root</user>
                                         <group>root</group>
                                     </mapper>
