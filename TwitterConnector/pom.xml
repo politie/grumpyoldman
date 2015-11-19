@@ -97,12 +97,6 @@
                                     </mapper>
                                 </data>
                                 <data>
-                                    <type>link</type>
-                                    <linkName>/var/lib/${artifactId}/${project.build.finalName}.jar</linkName>
-                                    <linkTarget>/etc/init.d/${artifactId}</linkTarget>
-                                    <symlink>true</symlink>
-                                </data>
-                                <data>
                                     <type>files</type>
                                     <paths>
                                         <path>${basedir}/../LICENSE</path>
