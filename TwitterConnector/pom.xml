@@ -66,6 +66,40 @@
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
             </plugin>
+            <plugin>
+                <artifactId>jdeb</artifactId>
+                <groupId>org.vafer</groupId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jdeb</goal>
+                        </goals>
+                        <configuration>
+                            <signPackage>false</signPackage>
+                            <dataSet>
+                                <data>
+                                    <src>${project.build.directory}/${project.build.finalName}.jar</src>
+                                    <type>file</type>
+                                    <mapper>
+                                        <type>perm</type>
+                                        <prefix>/var/lib/${artifactId}</prefix>
+                                    </mapper>
+                                </data>
+                                <data>
+                                    <type>files</type>
+                                    <paths>
+                                        <path>LICENSE</path>
+                                        <path>README.md</path>
+                                    </paths>
+                                    <dst>/var/lib/${artifactId}</dst>
+                                </data>
+                            </dataSet>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
