@@ -1,4 +1,4 @@
-package nl.politie.speeltuin.grumpyOldMen;
+package nl.politie.speeltuin.grumpyOldMen.connector.twitter;
 
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;

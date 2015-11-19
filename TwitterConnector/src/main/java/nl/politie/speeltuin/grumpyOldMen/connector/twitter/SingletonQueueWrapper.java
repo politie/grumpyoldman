@@ -1,4 +1,4 @@
-package nl.politie.speeltuin.grumpyOldMen;
+package nl.politie.speeltuin.grumpyOldMen.connector.twitter;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

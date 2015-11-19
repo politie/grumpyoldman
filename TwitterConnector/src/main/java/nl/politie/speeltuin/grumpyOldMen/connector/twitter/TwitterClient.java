@@ -1,4 +1,4 @@
-package nl.politie.speeltuin.grumpyOldMen;
+package nl.politie.speeltuin.grumpyOldMen.connector.twitter;
 
 import com.twitter.hbc.ClientBuilder;
 import com.twitter.hbc.core.Client;
