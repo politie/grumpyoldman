@@ -1,0 +1,8 @@
+Package: [[name]]
+Version: [[version]]
+Section: misc
+Priority: optional
+Architecture: all
+Maintainer: Arno Broekhof <arnobroekhof@gmail.com>
+Description: Politie Grumpy-Old-Man TwitterConnector
+Distribution: development
