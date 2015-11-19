@@ -77,6 +77,9 @@
                             <goal>jdeb</goal>
                         </goals>
                         <configuration>
+                            <controlDir>${basedir}/src/deb/control/</controlDir>
+                            <!-- It's important to use a classifier or the deb artifact will not be indexed by the nexus indexer -->
+                            <classifier>all</classifier>
                             <signPackage>false</signPackage>
                             <dataSet>
                                 <data>
