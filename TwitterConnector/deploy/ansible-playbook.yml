@@ -11,5 +11,6 @@
 
   - name: ensure the Twitter Connector service is started
     service: name=TwitterConnector state=started
+    ignore_erros: True
 
 
