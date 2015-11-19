@@ -103,6 +103,12 @@
                                     </paths>
                                     <dst>/var/lib/${artifactId}</dst>
                                 </data>
+                                <data>
+                                    <type>directory</type>
+                                    <src>${basedir}/src/main/config</src>
+                                    <includes/>
+                                    <conffile>true</conffile>
+                                </data>
                             </dataSet>
                         </configuration>
                     </execution>
