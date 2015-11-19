@@ -107,6 +107,7 @@
                                     <type>directory</type>
                                     <src>${basedir}/src/main/config</src>
                                     <includes/>
+                                    <dst>/var/lib/${artifactId}/config</dst>
                                     <conffile>true</conffile>
                                 </data>
                             </dataSet>
