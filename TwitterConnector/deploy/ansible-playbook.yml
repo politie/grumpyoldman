@@ -2,6 +2,7 @@
 
 - hosts: twitterconnector
   sudo: True
+  gather_facts: False
   tasks:
 
   - name: install Twitter Connector
