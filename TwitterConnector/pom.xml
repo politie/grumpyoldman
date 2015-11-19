@@ -107,7 +107,12 @@
                                     <type>directory</type>
                                     <src>${basedir}/src/main/config</src>
                                     <includes/>
-                                    <dst>/var/lib/${artifactId}/config</dst>
+                                    <mapper>
+                                        <type>perm</type>
+                                        <prefix>/var/lib/${artifactId}/config</prefix>
+                                        <user>root</user>
+                                        <group>root</group>
+                                    </mapper>
                                     <conffile>true</conffile>
                                 </data>
                             </dataSet>
