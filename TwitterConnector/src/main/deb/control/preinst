@@ -5,7 +5,3 @@ set -e
 getent group twitterconnector >/dev/null || groupadd -r twitterconnector
 getent passwd twitterconnector > /dev/null || useradd -c "twitterconnector" -s /bin/bash -g twitterconnector -d /var/lib/TwitterConnector twitterconnector 2> /dev/null || :
 
-if [ -f /etc/init.d/TwitterConnector ]; then
-    rm -f /etc/init.d/TwitterConnector
-fi
-

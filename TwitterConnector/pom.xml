@@ -68,11 +68,36 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
             </plugin>
             <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources-deb</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/generated-packaging/deb/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/deb/</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>jdeb</artifactId>
                 <groupId>org.vafer</groupId>
                 <version>1.4</version>
                 <configuration>
-                    <controlDir>${basedir}/src/main/deb/scripts</controlDir>
+                    <controlDir>${project.build.directory}/generated-packaging/deb/control</controlDir>
                 </configuration>
                 <executions>
                     <execution>
@@ -92,8 +117,8 @@
                                         <type>perm</type>
                                         <prefix>/var/lib/${artifactId}</prefix>
                                         <filemode>755</filemode>
-                                        <user>root</user>
-                                        <group>root</group>
+                                        <user>twitterconnector</user>
+                                        <group>twitterconnector</group>
                                     </mapper>
                                 </data>
                                 <data>
@@ -107,10 +132,11 @@
                                 <data>
                                     <type>directory</type>
                                     <src>${basedir}/src/main/config</src>
-                                    <includes/>
+                                    <includes />
                                     <mapper>
                                         <type>perm</type>
                                         <prefix>/var/lib/${artifactId}/config</prefix>
+                                        <filemode>755</filemode>
                                         <user>root</user>
                                         <group>root</group>
                                     </mapper>
@@ -125,6 +151,9 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
