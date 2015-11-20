@@ -1,14 +1,13 @@
 package nl.politie.speeltuin.grumpyOldMen.analyzer.sentiment.dictionary;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Simplified Java representation of a MPQA subjectivity lexicon entry. See http://mpqa.cs.pitt
  * .edu/lexicons/subj_lexicon/.
- *
- *
  */
-public class Sentiment {
+public class Sentiment implements Serializable {
 
     private final String type;
 
@@ -18,19 +17,13 @@ public class Sentiment {
 
     private final String priorPolarity;
 
-
     public Sentiment(String type, String word, String pos, String
-            priorPolarity) {
+        priorPolarity) {
         this.type = type;
         this.word = word;
         this.pos = pos;
         this.priorPolarity = priorPolarity;
     }
-
-    public String getWord() {
-        return word;
-    }
-
 
     static Sentiment map(String input) {
         String[] keyValues = input.split("\\s+");
@@ -60,7 +53,10 @@ public class Sentiment {
             }
         }
         return new Sentiment(type, word, pos, priorPolarity);
+    }
 
+    public String getWord() {
+        return word;
     }
 
     public double compute() {
@@ -68,8 +64,7 @@ public class Sentiment {
         double speech_multiplier = determineSpeechMultiplier(pos);
         double polarity_multiplier = determinePolarityMultiplier(priorPolarity);
 
-        return (emphasis_multiplier+speech_multiplier)*polarity_multiplier;
-
+        return (emphasis_multiplier + speech_multiplier) * polarity_multiplier;
     }
 
     private double determinePolarityMultiplier(String priorPolarity) {
@@ -87,7 +82,6 @@ public class Sentiment {
             default:
                 return 1;
         }
-
     }
 
     private double determineSpeechMultiplier(String pos) {
@@ -117,7 +111,7 @@ public class Sentiment {
         }
         Sentiment sentiment = (Sentiment) o;
         return
-                Objects.equals(type, sentiment.type) &&
+            Objects.equals(type, sentiment.type) &&
                 Objects.equals(word, sentiment.word) &&
                 Objects.equals(pos, sentiment.pos) &&
                 Objects.equals(priorPolarity, sentiment.priorPolarity);

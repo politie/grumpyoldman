@@ -1,7 +1,12 @@
 package nl.politie.speeltuin.grumpyOldMen.analyzer.sentiment;
 
-import com.datastax.spark.connector.japi.CassandraStreamingJavaUtil;
-import nl.politie.speeltuin.grumpyOldMen.analyzer.sentiment.dictionary.SentimentDictionary;
+import static com.datastax.spark.connector.japi.CassandraJavaUtil.mapToRow;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Stream;
+
 import org.apache.log4j.BasicConfigurator;
 import org.apache.spark.SparkConf;
 import org.apache.spark.streaming.Duration;
@@ -11,27 +16,23 @@ import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.apache.spark.streaming.kafka.KafkaUtils;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
+
+import com.datastax.spark.connector.japi.CassandraStreamingJavaUtil;
+
+import nl.politie.speeltuin.grumpyOldMen.analyzer.sentiment.dictionary.SentimentDictionary;
 import scala.Tuple2;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Stream;
-
-import static com.datastax.spark.connector.japi.CassandraJavaUtil.mapToRow;
 
 public class Main {
 
-
     private final Properties properties;
-
-    public static void main(String[] args) {
-        new Main().run();
-    }
 
     public Main() {
         BasicConfigurator.configure();
         properties = Properties.getInstance();
+    }
+
+    public static void main(String[] args) {
+        new Main().run();
     }
 
     public void run() {
@@ -39,16 +40,16 @@ public class Main {
         JavaStreamingContext context = new JavaStreamingContext(config, new Duration(2000));
 
         //ignore kafka id
-        JavaDStream<String> messages = createKafkaStream(context).map(Tuple2:: _2);
+        JavaDStream<String> messages = createKafkaStream(context).map(Tuple2::_2);
 
         JavaDStream<Tuple2<Long, String>> filteredTweets = preprocess(messages);
 
         JavaDStream<Result> analyzedTweets = analyse(filteredTweets);
 
         CassandraStreamingJavaUtil.javaFunctions(analyzedTweets).writerBuilder(
-                properties.get("cassandra.name.keyspace"),
-                properties.get("cassandra.name.table"),
-                mapToRow(Result.class)).saveToCassandra();
+            properties.get("cassandra.name.keyspace"),
+            properties.get("cassandra.name.table"),
+            mapToRow(Result.class)).saveToCassandra();
 
         context.start();
         context.awaitTermination();
@@ -59,10 +60,10 @@ public class Main {
         return filteredTweets.map(tweet -> {
             String[] words = tweet._2().split("\\s+");
             double score = Stream.of(words)
-                                 .map(word -> dictionary.getSentiment(word))
-                                 .filter(Optional:: isPresent)
-                                 .mapToDouble(s -> s.get().compute())
-                                 .sum();
+                .map(word -> dictionary.getSentiment(word))
+                .filter(Optional::isPresent)
+                .mapToDouble(s -> s.get().compute())
+                .sum();
 
             return new Result(tweet._1(), tweet._2(), score / words.length);
         });
@@ -89,10 +90,10 @@ public class Main {
         Map<String, Integer> topicMap = new HashMap<>();
         topicMap.put(properties.get("kafka.topic"), properties.getInt("kafka.paralellization"));
         return KafkaUtils
-                .createStream(context,
-                              properties.get("spark.hosts"),
-                              properties.get("app.name").replace(' ', '.'),
-                              topicMap);
+            .createStream(context,
+                properties.get("spark.hosts"),
+                properties.get("app.name").replace(' ', '.'),
+                topicMap);
     }
 
     private SparkConf createConfig() {
@@ -100,5 +101,4 @@ public class Main {
         config.setMaster(properties.get("spark.master"));
         return config;
     }
-
 }
