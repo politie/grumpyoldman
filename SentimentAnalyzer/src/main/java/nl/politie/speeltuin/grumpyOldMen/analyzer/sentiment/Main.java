@@ -91,7 +91,7 @@ public class Main {
         topicMap.put(properties.get("kafka.topic"), properties.getInt("kafka.paralellization"));
         return KafkaUtils
             .createStream(context,
-                properties.get("spark.hosts"),
+                properties.get("zookeeper.host"),
                 properties.get("app.name").replace(' ', '.'),
                 topicMap);
     }
@@ -99,6 +99,7 @@ public class Main {
     private SparkConf createConfig() {
         SparkConf config = new SparkConf().setAppName(properties.get("app.name"));
         config.setMaster(properties.get("spark.master"));
+        config.set("spark.cassandra.connection.host", properties.get("cassandra.host"));
         return config;
     }
 }
