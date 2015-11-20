@@ -12,8 +12,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <junit.version>4.12</junit.version>
-        <spark.version>1.5.2</spark.version>
-        <spark-cassandra-connector.version>1.5.0-M2</spark-cassandra-connector.version>
+        <spark.version>1.5.1</spark.version>
     </properties>
 
     <dependencies>
@@ -32,7 +31,7 @@
         <dependency>
             <groupId>com.datastax.spark</groupId>
             <artifactId>spark-cassandra-connector-java_2.10</artifactId>
-            <version>${spark-cassandra-connector.version}</version>
+            <version>1.3.1</version>
         </dependency>
 
         <dependency>
