@@ -16,7 +16,7 @@ public class SentimentDictionaryTest {
     @Test
     public void should_read_first_line(){
         SentimentDictionary dictionary = SentimentDictionary.getInstance();
-        assertThat(dictionary.getSentiment(WORD), is(equalTo(Sentiment.map(CORRECT_INPUT))));
+        assertThat(dictionary.getSentiment(WORD).get(), is(equalTo(Sentiment.map(CORRECT_INPUT))));
     }
 
 }
