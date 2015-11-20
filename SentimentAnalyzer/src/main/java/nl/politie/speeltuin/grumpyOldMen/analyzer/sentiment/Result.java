@@ -2,11 +2,12 @@ package nl.politie.speeltuin.grumpyOldMen.analyzer.sentiment;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 import java.util.Objects;
 
 public class Result implements Serializable {
 
-    private final Instant timeStamp;
+    private final Date timeStamp;
 
     private final Long id;
 
@@ -18,7 +19,7 @@ public class Result implements Serializable {
         this.id = id;
         this.tweet = tweet;
         this.polarityIndex = polarityIndex;
-        this.timeStamp = Instant.now();
+        this.timeStamp = new Date();
     }
 
     public Long getId() {
@@ -33,7 +34,7 @@ public class Result implements Serializable {
         return polarityIndex;
     }
 
-    public Instant getTimeStamp() {
+    public Date getTimeStamp() {
         return timeStamp;
     }
 
