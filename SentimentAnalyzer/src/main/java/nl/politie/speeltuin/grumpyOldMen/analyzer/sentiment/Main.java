@@ -1,5 +1,6 @@
 package nl.politie.speeltuin.grumpyOldMen.analyzer.sentiment;
 
+import com.datastax.spark.connector.japi.CassandraStreamingJavaUtil;
 import nl.politie.speeltuin.grumpyOldMen.analyzer.sentiment.dictionary.SentimentDictionary;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.spark.SparkConf;
@@ -11,12 +12,13 @@ import org.apache.spark.streaming.kafka.KafkaUtils;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import scala.Tuple2;
-import scala.Tuple3;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
+
+import static com.datastax.spark.connector.japi.CassandraJavaUtil.mapToRow;
 
 public class Main {
 
@@ -41,8 +43,20 @@ public class Main {
 
         JavaDStream<Tuple2<Long, String>> filteredTweets = preprocess(messages);
 
+        JavaDStream<Result> analyzedTweets = analyse(filteredTweets);
+
+        CassandraStreamingJavaUtil.javaFunctions(analyzedTweets).writerBuilder(
+                properties.get("cassandra.name.keyspace"),
+                properties.get("cassandra.name.table"),
+                mapToRow(Result.class)).saveToCassandra();
+
+        context.start();
+        context.awaitTermination();
+    }
+
+    private JavaDStream<Result> analyse(JavaDStream<Tuple2<Long, String>> filteredTweets) {
         SentimentDictionary dictionary = SentimentDictionary.getInstance();
-        JavaDStream<Tuple3<Long, String, Double>> processed = filteredTweets.map(tweet -> {
+        return filteredTweets.map(tweet -> {
             String[] words = tweet._2().split("\\s+");
             double score = Stream.of(words)
                                  .map(word -> dictionary.getSentiment(word))
@@ -50,11 +64,8 @@ public class Main {
                                  .mapToDouble(s -> s.get().compute())
                                  .sum();
 
-            return new Tuple3<>(tweet._1(), tweet._2(), score / words.length);
+            return new Result(tweet._1(), tweet._2(), score / words.length);
         });
-
-        context.start();
-        context.awaitTermination();
     }
 
     private JavaDStream<Tuple2<Long, String>> preprocess(JavaDStream<String> messages) {
