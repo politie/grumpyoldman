@@ -19,11 +19,13 @@ public class SentimentDictionary {
 
     private static final Logger log = LoggerFactory.getLogger(SentimentDictionary.class);
 
-    private static final String LEXICON_FILE = "lexicon.txt";
+    private static final String LEXICON_FILE = "./lexicon.txt";
 
     private SentimentDictionary() {
-        Stream<String> lines = new BufferedReader(new InputStreamReader(ClassLoader.getSystemResourceAsStream
-                (LEXICON_FILE))).lines();
+        Stream<String> lines = new BufferedReader(new InputStreamReader(SentimentDictionary
+                                                                                .class.getClassLoader()
+                                                                                      .getSystemResourceAsStream
+                                                                                              (LEXICON_FILE))).lines();
         lines.map(Sentiment:: map).forEach(s -> cache.putIfAbsent(s.getWord(), s));
     }
 
