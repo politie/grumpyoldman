@@ -1,19 +1,23 @@
 package nl.politie.speeltuin.grumpyOldMen.analyzer.sentiment;
 
+import java.time.Instant;
 import java.util.Objects;
 
 public class Result {
 
-    private Long id;
+    private final Instant timeStamp;
 
-    private String tweet;
+    private final Long id;
 
-    private Double polarityIndex;
+    private final String tweet;
+
+    private final Double polarityIndex;
 
     public Result(Long id, String tweet, Double polarityIndex) {
         this.id = id;
         this.tweet = tweet;
         this.polarityIndex = polarityIndex;
+        this.timeStamp = Instant.now();
     }
 
     public Long getId() {
@@ -26,6 +30,10 @@ public class Result {
 
     public Double getPolarityIndex() {
         return polarityIndex;
+    }
+
+    public Instant getTimeStamp() {
+        return timeStamp;
     }
 
     @Override
