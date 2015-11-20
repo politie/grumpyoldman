@@ -9,7 +9,7 @@ public class Properties {
 
     private java.util.Properties properties = new java.util.Properties();
 
-    private Path defaultPropertyPath = Paths.get("config/applications.properties");
+    private Path defaultPropertyPath = Paths.get("src/main/config/applications.properties");
 
     private Properties(){
         try {
