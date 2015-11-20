@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>nl.politie.speeltuin</groupId>
+    <artifactId>ci-parent</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <!-- build -->
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources-deb</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/generated-packaging/deb/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/deb/</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>jdeb</artifactId>
+                <groupId>org.vafer</groupId>
+                <version>1.4</version>
+                <configuration>
+                    <controlDir>${project.build.directory}/generated-packaging/deb/control</controlDir>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>jdeb</goal>
+                        </goals>
+                        <configuration>
+                            <!-- It's important to use a classifier or the deb artifact will not be indexed by the nexus indexer -->
+                            <classifier>all</classifier>
+                            <signPackage>false</signPackage>
+                            <dataSet>
+                                <data>
+                                    <src>${project.build.directory}/${project.build.finalName}.jar</src>
+                                    <type>file</type>
+                                    <mapper>
+                                        <type>perm</type>
+                                        <prefix>/var/lib/${artifactId}</prefix>
+                                        <filemode>755</filemode>
+                                        <user>twitterconnector</user>
+                                        <group>twitterconnector</group>
+                                    </mapper>
+                                </data>
+                                <data>
+                                    <type>files</type>
+                                    <paths>
+                                        <path>${basedir}/../LICENSE</path>
+                                        <path>${basedir}/../README.md</path>
+                                    </paths>
+                                    <dst>/var/lib/${artifactId}</dst>
+                                </data>
+                                <data>
+                                    <type>directory</type>
+                                    <src>${basedir}/src/main/config</src>
+                                    <includes />
+                                    <mapper>
+                                        <type>perm</type>
+                                        <prefix>/var/lib/${artifactId}/config</prefix>
+                                        <filemode>755</filemode>
+                                        <user>root</user>
+                                        <group>root</group>
+                                    </mapper>
+                                    <conffile>true</conffile>
+                                </data>
+                            </dataSet>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
