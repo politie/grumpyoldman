@@ -5,7 +5,6 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.spark.SparkConf;
 import org.apache.spark.streaming.Duration;
 import org.apache.spark.streaming.api.java.JavaDStream;
-import org.apache.spark.streaming.api.java.JavaPairDStream;
 import org.apache.spark.streaming.api.java.JavaPairReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.apache.spark.streaming.kafka.KafkaUtils;
@@ -46,10 +45,10 @@ public class Main {
         JavaDStream<Tuple3<Long, String, Double>> processed = filteredTweets.map(tweet -> {
             String[] words = tweet._2().split("\\s+");
             double score = Stream.of(words)
-                                .map(word -> dictionary.getSentiment(word))
-                                .filter(Optional:: isPresent)
-                                .mapToDouble(s -> s.get().compute())
-                                .sum();
+                                 .map(word -> dictionary.getSentiment(word))
+                                 .filter(Optional:: isPresent)
+                                 .mapToDouble(s -> s.get().compute())
+                                 .sum();
 
             return new Tuple3<>(tweet._1(), tweet._2(), score / words.length);
         });
