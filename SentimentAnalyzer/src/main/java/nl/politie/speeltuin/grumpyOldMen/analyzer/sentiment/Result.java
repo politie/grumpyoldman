@@ -1,9 +1,10 @@
 package nl.politie.speeltuin.grumpyOldMen.analyzer.sentiment;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-public class Result {
+public class Result implements Serializable {
 
     private final Instant timeStamp;
 

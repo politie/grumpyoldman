@@ -1,5 +1,6 @@
 package nl.politie.speeltuin.grumpyOldMen.analyzer.sentiment.dictionary;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Objects;
  *
  *
  */
-public class Sentiment {
+public class Sentiment implements Serializable {
 
     private final String type;
 
