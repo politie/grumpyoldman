@@ -23,7 +23,7 @@ public class SentimentDictionary implements Serializable {
 
     private SentimentDictionary() {
 
-        System.out.println("Trying to get file " + LEXICON_FILE + " from classpath");
+        log.trace("Trying to get file " + LEXICON_FILE + " from classpath");
         InputStream inputStream = getClass().getResourceAsStream(LEXICON_FILE);
         Stream<String> lines = new BufferedReader(new InputStreamReader(inputStream)).lines();
         lines.map(Sentiment::map).forEach(s -> cache.putIfAbsent(s.getWord(), s));
