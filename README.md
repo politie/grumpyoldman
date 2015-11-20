@@ -19,7 +19,7 @@ Optional, if you also would like to see an example implementation of Continuous 
 
 ### ContinuousIntegration
 
-This folder contains a parent pom that describes a continuous integration process. The idea is that you define a git trigger that starts a Jenkins pipeline. That pipeline builds, tests and deploys both a java artifact and a debian package. The debian servers hosting the java artifact use Nexus as well as deb repository. A simple apt-get update suffices for the automatic deployment.
+This folder contains a parent pom that describes a continuous integration process. The idea is that you define a git trigger that starts a Jenkins pipeline. That pipeline builds, tests and deploys both a java artifact and a debian package. The debian servers hosting the java artifact use Nexus as deb repository. A simple apt-get update suffices for the automatic deployment.
 
 ### TwitterConnector
 
