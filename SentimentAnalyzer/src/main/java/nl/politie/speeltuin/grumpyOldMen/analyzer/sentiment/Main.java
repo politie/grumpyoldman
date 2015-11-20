@@ -37,6 +37,7 @@ public class Main {
 
     public void run() {
         SparkConf config = createConfig();
+
         JavaStreamingContext context = new JavaStreamingContext(config, new Duration(2000));
 
         //ignore kafka id
@@ -91,15 +92,15 @@ public class Main {
         topicMap.put(properties.get("kafka.topic"), properties.getInt("kafka.paralellization"));
         return KafkaUtils
             .createStream(context,
-                properties.get("zookeeper.host"),
+                properties.get("kafka.hosts"),
                 properties.get("app.name").replace(' ', '.'),
                 topicMap);
     }
 
     private SparkConf createConfig() {
         SparkConf config = new SparkConf().setAppName(properties.get("app.name"));
-        config.setMaster(properties.get("spark.master"));
         config.set("spark.cassandra.connection.host", properties.get("cassandra.host"));
+        config.setMaster(properties.get("spark.master"));
         return config;
     }
 }
