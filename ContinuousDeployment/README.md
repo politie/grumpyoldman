@@ -14,14 +14,14 @@ src/main/deb/control
 - prerm
 ```
 
-and the the Continuous Deployment artifact is defined as parent in the pom.xml
+and the Continuous Deployment artifact is defined as parent in the pom.xml
 
 ```xml
  <parent>
-        <groupId>nl.politie.speeltuin</groupId>
-        <artifactId>ci-parent</artifactId>
-        <version>1.0.0</version>
-    </parent>
+    <groupId>nl.politie.speeltuin</groupId>
+    <artifactId>ci-parent</artifactId>
+    <version>1.0.0</version>
+ </parent>
 ```
 
 
