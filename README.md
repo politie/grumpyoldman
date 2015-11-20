@@ -1,6 +1,6 @@
 # Grumpy Old Men
 
-The Grumpy Old Men is a demo project about Big Data, Continuous Development and Micro Services. Sentiment analysis is a common example for explaining Big Data methodologies. This example analyzes the sentiment of tweets. We filter the positive and negative words and provide these words with arbitrary value. The rating algorithm is completely arbitrary and does not represent any production-like environment. This example is merely used for explaining the development and interaction of different components in a distributed environment like an Open Stack cluster. It is not about doing sentiment analysis.
+The Grumpy Old Men is a demo project about Big Data, Continuous Development and Micro Services. Sentiment analysis is a common example for explaining Big Data techniques. This example analyzes the sentiment of tweets. We filter the positive and negative words and provide these words with arbitrary value. The rating algorithm is completely arbitrary and does not represent any production-like environment. This example is merely used for explaining the development and interaction of different components in a distributed environment like an Open Stack cluster. It is not about doing sentiment analysis.
 
 You need the following services in order to proceed:
 
