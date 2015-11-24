@@ -37,7 +37,6 @@ public class ScheduledTwitterHandler {
 
         while (!queue.isEmpty()) {
             String msg = queue.take();
-            System.out.println(msg);
             ProducerRecord<String, String> data = new ProducerRecord<>(topic, msg);
             producer.send(data);
         }
