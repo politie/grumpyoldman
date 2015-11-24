@@ -1,0 +1,50 @@
+{
+  "private": true,
+  "devDependencies": {
+    "autoprefixer-core": "*",
+    "bower": "*",
+    "grunt": "*",
+    "grunt-babel": "*",
+    "grunt-browser-sync": "*",
+    "grunt-concurrent": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-htmlmin": "*",
+    "grunt-contrib-imagemin": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-eslint": "*",
+    "grunt-filerev": "*",
+    "grunt-karma": "*",
+    "grunt-newer": "*",
+    "grunt-postcss": "*",
+    "grunt-sass": "*",
+    "grunt-svgmin": "*",
+    "grunt-usemin": "*",
+    "grunt-wiredep": "*",
+    "jit-grunt": "*",
+    "karma": "*",
+    "time-grunt": "*"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "browser": true,
+      "mocha": true
+    },
+    "rules": {
+      "quotes": [
+        2,
+        "single"
+      ]
+    }
+  }
+}
