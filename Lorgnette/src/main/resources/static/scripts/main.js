@@ -21,7 +21,7 @@ $(function () {
     };
     var lineChart = new Chart(ctx).Line(data);
 
-    var sock = new SockJS('http://localhost:8080/tweets');
+    var sock = new SockJS('/tweets');
     sock.onmessage = function (e) {
         that.count++;
     };
