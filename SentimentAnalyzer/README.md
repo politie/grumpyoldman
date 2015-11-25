@@ -33,7 +33,7 @@ CREATE TABLE result (
   id bigint PRIMARY KEY,
   tweet text,
   polarityindex double,
-  timestap timestamp
+  timestamp timestamp
 ```
 
 ##Building and running

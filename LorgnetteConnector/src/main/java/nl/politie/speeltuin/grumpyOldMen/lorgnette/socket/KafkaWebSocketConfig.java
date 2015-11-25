@@ -1,4 +1,4 @@
-package nl.politie.speeltuin.grumpyOldMen.lorgnette.rest;
+package nl.politie.speeltuin.grumpyOldMen.lorgnette.socket;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,7 +12,6 @@ import org.springframework.integration.annotation.Transformer;
 import org.springframework.integration.channel.ExecutorChannel;
 import org.springframework.integration.channel.PublishSubscribeChannel;
 import org.springframework.integration.core.MessageSelector;
-import org.springframework.integration.handler.LoggingHandler;
 import org.springframework.integration.kafka.core.ConnectionFactory;
 import org.springframework.integration.kafka.core.DefaultConnectionFactory;
 import org.springframework.integration.kafka.core.ZookeeperConfiguration;

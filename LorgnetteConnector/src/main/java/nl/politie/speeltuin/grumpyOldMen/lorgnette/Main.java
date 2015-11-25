@@ -1,16 +1,17 @@
-package nl.politie.speeltuin.grumpyOldMen.lorgnette.rest;
+package nl.politie.speeltuin.grumpyOldMen.lorgnette;
 
 
+import nl.politie.speeltuin.grumpyOldMen.lorgnette.socket.KafkaWebSocketConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * Bootstraps the spring application
  */
-@Configuration
-@EnableAutoConfiguration
+@SpringBootApplication
 public class Main {
 
     public static void main(String[] args) throws Exception {
