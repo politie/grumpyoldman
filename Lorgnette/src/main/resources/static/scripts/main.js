@@ -31,11 +31,10 @@ $(function () {
 
     function loadData() {
         var epoch = new Date();
-        var label = epoch.getHours()+":"+epoch.getMinutes()+":00";
+        var label = epoch.getHours()+":"+epoch.getMinutes()+":" +epoch.getSeconds();
         lineChart.addData([Math.random() * 100],label);
-        if(lineChart.datasets[0].points.length >40){
+        if(lineChart.datasets[0].points.length >60){
             lineChart.removeData();
-            lineChart.l
         }
 
     }
