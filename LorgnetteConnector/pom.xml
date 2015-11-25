@@ -11,7 +11,7 @@
     <!--</parent>-->
 
     <groupId>nl.politie.speeltuin.grumpyOldMen</groupId>
-    <artifactId>Lorgnette-REST</artifactId>
+    <artifactId>LorgnetteConnector</artifactId>
     <version>LOCAL</version>
     <packaging>jar</packaging>
 

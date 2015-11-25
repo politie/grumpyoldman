@@ -1,0 +1,19 @@
+{
+  "name": "Lorgnette",
+  "main": "",
+  "authors": [
+    "iRN <info@colombo.nl>"
+  ],
+  "license": "Apache 2",
+  "homepage": "https://github.com/politie/grumpyoldman",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "dependencies": {
+    "sockjs": "~0.3.4"
+  }
+}
