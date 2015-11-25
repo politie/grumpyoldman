@@ -15,8 +15,8 @@ import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@RestController
-//@RequestMapping(AnalysisEndpoint.URL)
+@RestController
+@RequestMapping(AnalysisEndpoint.URL)
 public class AnalysisEndpoint {
 
     public static final String URL = "analysis";
@@ -25,13 +25,13 @@ public class AnalysisEndpoint {
 
     private static final String SENTIMENT_TIME_ALL = SENTIMENT_TIME +"-all";
 
-    private final Session session = null;
+    private final Session session;
 
-//    @Autowired
-//    public AnalysisEndpoint(@Value("${cassandra.host}") String cassandraHost, @Value("${cassandra.keyspace}")
-//    String keyspace) {
-//        session = Cluster.builder().addContactPoint(cassandraHost).build().connect(keyspace);
-//    }
+    @Autowired
+    public AnalysisEndpoint(@Value("${cassandra.host}") String cassandraHost, @Value("${cassandra.keyspace}")
+    String keyspace) {
+        session = Cluster.builder().addContactPoint(cassandraHost).build().connect(keyspace);
+    }
 
     @RequestMapping(value = SENTIMENT_TIME, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<SentimentTimestamp> getSentimentOverTime() {

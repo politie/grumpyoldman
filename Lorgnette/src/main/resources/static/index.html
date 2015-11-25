@@ -3,22 +3,39 @@
 <head>
     <meta charset="utf-8">
     <title>Lorgnette | data visualizer</title>
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <link rel="stylesheet" href="styles/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 
 <header>
-<img src="img/logo.png" alt="logo">
-    <span id="#counter"></span>
+    <svg id="logo" version="1.1"
+	 xmlns="http://www.w3.org/2000/svg"
+	  viewBox="-13.888 -5.939 466 326" enable-background="new -13.888 -5.939 466 326"
+	 xml:space="preserve">
+<defs>
+</defs>
+<circle fill="none" stroke="#F26101" stroke-width="23" cx="81.5" cy="84.595" r="70"/>
+<circle fill="none" stroke="#F26101" stroke-width="23" cx="361.5" cy="84.595" r="70"/>
+<path fill="none" stroke="#F26101" stroke-width="23" d="M151.5,81.5c0-38.66,31.339-70,70-70c38.66,0,70,31.34,70,70"/>
+<line fill="none" stroke="#F26101" stroke-width="23" x1="11.5" y1="81.5" x2="11.5" y2="303.284"/>
+<ellipse fill="#CCCCCC" stroke="#999999" stroke-width="4.522" cx="95.498" cy="108.624" rx="22.912" ry="22.5"/>
+<ellipse fill="#FFFFFF" cx="100.811" cy="113.811" rx="10.938" ry="10.675"/>
+<ellipse fill="#666666" cx="101.397" cy="113.564" rx="3.841" ry="4.939"/>
+<path fill="#CCCCCC" stroke="#999999" stroke-width="4.522" d="M397.949,108.624c0,12.428-10.261,22.5-22.915,22.5
+	c-12.649,0-22.91-10.073-22.91-22.5s10.261-22.5,22.91-22.5C387.688,86.124,397.949,96.196,397.949,108.624z"/>
+<path fill="#FFFFFF" d="M391.286,113.811c0,5.895-4.896,10.675-10.939,10.675c-6.038,0-10.938-4.78-10.938-10.675
+	s4.899-10.675,10.938-10.675C386.391,103.135,391.286,107.916,391.286,113.811z"/>
+<path fill="#666666" d="M384.777,113.564c0,2.728-1.72,4.938-3.84,4.938c-2.125,0-3.845-2.21-3.845-4.938s1.72-4.94,3.845-4.94
+	C383.058,108.624,384.777,110.836,384.777,113.564z"/>
+</svg>
+<h1>Data visualizer</h1>
+
 </header>
-
-<section>
-
-</section>
-<section id="tweets">
-
-</section>
+<canvas id="chart"></canvas>
+<div class="counter">
+    <span>live tweets: <b><em id="counter"></em></b></span>
+</div>
 
 <script src="/scripts/vendors/jquery.js"></script>
 <script src="/scripts/vendors/sockjs.js"></script>
