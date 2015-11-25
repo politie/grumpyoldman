@@ -175,7 +175,11 @@ public class KafkaWebSocketConfig {
 
     @Bean
     ServerWebSocketContainer serverWebSocketContainer() {
-        return new ServerWebSocketContainer(URL).withSockJs();
+        ServerWebSocketContainer container = new ServerWebSocketContainer(URL).withSockJs();
+        ServerWebSocketContainer.SockJsServiceOptions options = new ServerWebSocketContainer.SockJsServiceOptions();
+        options.setClientLibraryUrl("http://speeltuin.dev");
+        container.setSockJsServiceOptions(new ServerWebSocketContainer.SockJsServiceOptions());
+        return container;
     }
 
     @Bean

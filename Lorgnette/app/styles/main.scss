@@ -1,0 +1,18 @@
+@import "_normalize.scss";
+
+section{
+  height: 40%;
+  width: 100%;
+}
+
+header{
+  background: $lightgrey;
+  width: 100%;
+  height:10%;
+}
+
+#tweets{
+  background: black;
+  color: green;
+}
+
