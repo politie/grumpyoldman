@@ -1,7 +1,0 @@
-#!/bin/bash
-
-set -e
-
-getent group lorgnetteconnector >/dev/null || groupadd -r lorgnetteconnector
-getent passwd lorgnetteconnector > /dev/null || useradd -c "lorgnetteconnector" -s /bin/bash -g lorgnetteconnector -d /var/lib/TwitterConnector lorgnetteconnector 2> /dev/null || :
-
