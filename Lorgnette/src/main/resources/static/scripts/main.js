@@ -6,11 +6,11 @@ $(function () {
     this.labels = [];
 
 
-    //var sock = new SockJS('/tweets');
-    //sock.onmessage = function (e) {
-    //    that.count++;
-    //};
-    //
+    var sock = new SockJS('/tweets');
+    sock.onmessage = function (e) {
+        that.count++;
+    };
+
     var ctx = $("#chart").get(0).getContext("2d");
 
     this.data = {
