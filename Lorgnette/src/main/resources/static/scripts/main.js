@@ -51,11 +51,10 @@ $(function () {
 
 
     window.setInterval(function () {
-        loadData();
         $("#counter").text(that.count);
     }, 1000 / 25);
 
     window.setInterval(function () {
         loadData();
-    }, 5000);
+    }, 1000);
 });
