@@ -36,8 +36,12 @@ $(function () {
                 var date = new Date(this.timestamp);
                 var label = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
                 lineChart.addData([this.sentiment], label);
+                that.sentiment.push(this.sentiment);
+                while (that.sentiment.length > 250) {
+                    lineChart.removeData();
+                    that.sentiment.shift();
+                }
             });
-            lineChart.removeData();
 
         });
     }
@@ -49,4 +53,5 @@ $(function () {
     window.setInterval(function () {
         loadData();
     }, 2000);
+
 });
