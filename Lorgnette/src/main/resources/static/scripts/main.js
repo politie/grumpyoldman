@@ -8,6 +8,7 @@ $(function () {
 
     var sock = new SockJS('/tweets');
     sock.onmessage = function (e) {
+        $("#tweets").prepend($('<div class="bubble"><span class="tweet">' + e.data + '</span></div>'));
         that.count++;
     };
 
@@ -31,7 +32,7 @@ $(function () {
     var lineChart = new Chart(ctx);
 
     function loadData() {
-        $.getJSON('/analysis/sentiment-time-all', function (data) {
+        $.getJSON('/analysis/dummy', function (data) {
             $.each(data, function () {
                 var date = new Date(this.timestamp);
                 var label = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
