@@ -17,9 +17,6 @@ public class Main {
     public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext ctx = SpringApplication.run(new Object[] { Main.class, KafkaWebSocketConfig
                 .class }, args);
-        System.out.println("Hit 'Enter' to terminate");
-        System.in.read();
-        ctx.close();
     }
 
 }
