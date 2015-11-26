@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * In memory dictionary containing the subjectivity lexicon from http://mpqa.cs.pitt.edu/lexicons/
+ * In-memory dictionary containing the subjectivity lexicon from http://mpqa.cs.pitt.edu/lexicons/
  */
 public class SentimentDictionary implements Serializable {
 

@@ -22,6 +22,10 @@ import com.datastax.spark.connector.japi.CassandraStreamingJavaUtil;
 import nl.politie.speeltuin.grumpyOldMen.analyzer.sentiment.dictionary.SentimentDictionary;
 import scala.Tuple2;
 
+/**
+ * Clearly, Spark is more suited for Scala's functional programmings approach. Java 8 lambda's help to describe the
+ * required flow.
+ */
 public class Main {
 
     private final Properties properties;

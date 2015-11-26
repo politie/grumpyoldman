@@ -50,6 +50,10 @@ public class AnalysisEndpoint {
                       .collect(Collectors.toList());
     }
 
+    /**
+     * Data generator for testing UI
+     * @return
+     */
     @RequestMapping(value = "dummy", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<SentimentTimestamp> getDummy() {
         Instant now = Instant.now();

@@ -7,7 +7,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * Singleton queue to cache tweets.
+ * Singleton queue to cache tweets. A bit dirty, but it works.
  */
 @Component
 @Scope("singleton")

@@ -2,6 +2,9 @@ package nl.politie.speeltuin.grumpyOldMen.analyzer.sentiment;
 
 import java.io.IOException;
 
+/**
+ * Simple properties file reader
+ */
 public class Properties {
 
     private java.util.Properties properties = new java.util.Properties();

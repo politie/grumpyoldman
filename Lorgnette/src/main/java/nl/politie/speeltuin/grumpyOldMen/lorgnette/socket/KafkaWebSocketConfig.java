@@ -36,7 +36,12 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
-
+/**
+ * When looking at this code, you wonder why Spring forgot the reason they started their venture. Anyway, this is a
+ * clear example of verbose xml config in java speak. The cool thing is that you can do something advanced with
+ * merely config. Sure you can use lambda's to make it look even better, but doesn't help understanding the implemented
+ * flow. Verbosity is simply part of enterprise speak.
+ */
 @Configuration
 @EnableScheduling
 public class KafkaWebSocketConfig {
@@ -52,6 +57,9 @@ public class KafkaWebSocketConfig {
     @Autowired
     KafkaMessageDrivenChannelAdapter adapter;
 
+    /**
+     * Simple, but blunt, polling mechanism to start the flow when a websocket session starts
+     */
     @Scheduled(fixedRate = 1000)
     public void checkForSessions() {
         boolean hasSessions = !serverWebSocketContainer().getSessions().isEmpty();
@@ -80,9 +88,8 @@ public class KafkaWebSocketConfig {
 
     /**
      * The KafkaMessageDrivenChannelAdapter implements MessageProducer, reads a KafkaMessage with its Metadata and
-     * sends it as a Spring Integration message to the provided MessageChannel.
-     *
-     * @return
+     * sends it as a Spring Integration message to the provided MessageChannel. This is an endpoint that starts the
+     * flow.
      */
     @Bean
     KafkaMessageDrivenChannelAdapter kafkaMessageDrivenChannelAdapter() {
@@ -175,13 +182,12 @@ public class KafkaWebSocketConfig {
 
     @Bean
     ServerWebSocketContainer serverWebSocketContainer() {
-        ServerWebSocketContainer container = new ServerWebSocketContainer(URL).withSockJs();
-        ServerWebSocketContainer.SockJsServiceOptions options = new ServerWebSocketContainer.SockJsServiceOptions();
-        options.setClientLibraryUrl("http://speeltuin.dev");
-        container.setSockJsServiceOptions(new ServerWebSocketContainer.SockJsServiceOptions());
-        return container;
+        return new ServerWebSocketContainer(URL).withSockJs();
     }
 
+    /**
+     * Websocket endpoint.
+     */
     @Bean
     @ServiceActivator(inputChannel = "dispatchChannel")
     MessageHandler webSocketOutboundAdapter() {
