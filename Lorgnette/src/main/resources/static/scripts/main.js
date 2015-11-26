@@ -3,7 +3,6 @@ $(function () {
     this.count = 0;
     this.frame = 100 / 25;
     this.sentiment = [];
-    this.labels = [];
 
 
     var sock = new SockJS('/tweets');
@@ -14,8 +13,8 @@ $(function () {
 
     var ctx = $("#chart").get(0).getContext("2d");
 
-    this.data = {
-        labels: this.labels,
+    var data = {
+        labels: [],
         datasets: [
             {
                 label: "Polarity index",
@@ -25,30 +24,23 @@ $(function () {
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
-                data: this.sentiment
+                data: []
             }
         ]
     };
-    var lineChart = new Chart(ctx);
+    var lineChart = new Chart(ctx, {"animationSteps": 5}).Line(data);
 
     function loadData() {
-        $.getJSON('/analysis/sentiment-time', function (data) {
+        $.getJSON('/analysis/dummy', function (data) {
             $.each(data, function () {
                 var date = new Date(this.timestamp);
                 var label = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-                that.labels.push(label);
-                that.sentiment.push(this.sentiment);
-                if (that.sentiment.length > 40) {
-                    that.sentiment.shift();
-                    that.labels.shift();
-                }
+                lineChart.addData([this.sentiment], label);
             });
-            lineChart.Line(that.data);
+            lineChart.removeData();
+
         });
-
-
     }
-
 
     window.setInterval(function () {
         $("#counter").text(that.count);
@@ -56,5 +48,5 @@ $(function () {
 
     window.setInterval(function () {
         loadData();
-    }, 1000);
+    }, 2000);
 });
