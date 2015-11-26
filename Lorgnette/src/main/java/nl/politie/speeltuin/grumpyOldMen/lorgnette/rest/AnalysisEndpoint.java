@@ -38,7 +38,7 @@ public class AnalysisEndpoint {
     @RequestMapping(value = SENTIMENT_TIME, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<SentimentTimestamp> getSentimentOverTime() {
         Statement query = QueryBuilder.select().column("polarityindex").column("timestamp").from("result").where
-                (QueryBuilder.gt("timestamp", new Date(System.currentTimeMillis() - (1000 * 150))));
+                (QueryBuilder.gt("timestamp", new Date(System.currentTimeMillis() - (1000 * 60))));
         return session.execute(query).all().stream()
                       .map(r -> new SentimentTimestamp(r.getDouble("polarityindex"), r.getDate("timestamp")))
                       .collect(Collectors.toList());
@@ -55,9 +55,9 @@ public class AnalysisEndpoint {
     @RequestMapping(value = "dummy", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<SentimentTimestamp> getDummy() {
         Instant now = Instant.now();
-        Instant past = new Date(System.currentTimeMillis() - (1000 * 150)).toInstant();
+        Instant past = new Date(System.currentTimeMillis() - (1000 * 60)).toInstant();
         List<SentimentTimestamp> result = new ArrayList<>();
-        for (long i = past.toEpochMilli(); i < now.toEpochMilli(); i += 2000) {
+        for (long i = past.toEpochMilli(); i < now.toEpochMilli(); i += 5000) {
             double sentiment = -2 + (Math.random() * 4);
             Date date = new Date(i);
             result.add(new SentimentTimestamp(sentiment, date));

@@ -42,7 +42,7 @@ $(function () {
                     that.labels.shift();
                 }
             });
-            lineChart.Line(that.data, {animationSteps: 10});
+            lineChart.Line(that.data);
         });
 
 
@@ -56,5 +56,5 @@ $(function () {
 
     window.setInterval(function () {
         loadData();
-    }, 2000);
+    }, 5000);
 });
