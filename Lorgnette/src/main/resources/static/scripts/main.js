@@ -2,8 +2,6 @@ $(function () {
     var that = this;
     this.count = 0;
     this.frame = 100 / 25;
-    this.sentiment = [];
-    this.labels = [];
 
 
     var sock = new SockJS('/tweets');
@@ -32,14 +30,12 @@ $(function () {
     var lineChart = new Chart(ctx).Line(data);
 
     function loadData() {
-        $.getJSON('/analysis/dummy', function (data) {
+        $.getJSON('/analysis/sentiment-time', function (data) {
             $.each(data, function () {
                 var date = new Date(this.timestamp);
                 var label = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
                 lineChart.addData([this.sentiment], label);
             });
-            lineChart.removeData();
-
         });
     }
 
