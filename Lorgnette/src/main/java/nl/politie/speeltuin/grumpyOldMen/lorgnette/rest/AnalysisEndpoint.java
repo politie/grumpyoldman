@@ -37,12 +37,9 @@ public class AnalysisEndpoint {
 
     @RequestMapping(value = SENTIMENT_TIME, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<SentimentTimestamp> getSentimentOverTime() {
-        String cql = "SELECT polarityindex,timestamp FROM result WHERE timestamp > "
-                     + Instant.now().minus(Duration.ofMinutes(5)).toEpochMilli() +
-                     " ALLOW FILTERING";
-        return session.execute(cql).all().stream()
-                      .map(r -> new SentimentTimestamp(r.getDouble("polarityindex"), r.getDate("timestamp")))
-                      .collect(Collectors.toList());
+        Instant past = Instant.now().minus(Duration.ofMinutes(5));
+        return getAllSentimentOverTime().stream().filter(s ->s.getTimestamp().toInstant().isAfter(past)).collect(
+                Collectors.toList());
     }
 
     @RequestMapping(value = SENTIMENT_TIME_ALL, produces = MediaType.APPLICATION_JSON_VALUE)
