@@ -31,7 +31,7 @@ $(function () {
     var lineChart = new Chart(ctx, {"animationSteps": 5}).Line(data);
 
     function loadData() {
-        $.getJSON('/analysis/dummy', function (data) {
+        $.getJSON('/analysis/sentiment-time', function (data) {
             $.each(data, function () {
                 var date = new Date(this.timestamp);
                 var label = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
