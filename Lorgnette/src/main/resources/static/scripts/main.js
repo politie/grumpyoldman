@@ -31,7 +31,7 @@ $(function () {
     var lineChart = new Chart(ctx);
 
     function loadData() {
-        $.getJSON('/analysis/sentiment-time', function (data) {
+        $.getJSON('/analysis/sentiment-time-all', function (data) {
             $.each(data, function () {
                 var date = new Date(this.timestamp);
                 var label = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
@@ -42,7 +42,7 @@ $(function () {
                     that.labels.shift();
                 }
             });
-            lineChart.Line(that.data, {animationSteps: 10});
+            lineChart.Line(that.data);
         });
 
 
@@ -56,5 +56,5 @@ $(function () {
 
     window.setInterval(function () {
         loadData();
-    }, 2000);
+    }, 5000);
 });
