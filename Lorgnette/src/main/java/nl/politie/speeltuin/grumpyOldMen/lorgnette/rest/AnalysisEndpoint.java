@@ -37,7 +37,7 @@ public class AnalysisEndpoint {
 
     @RequestMapping(value = SENTIMENT_TIME, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<SentimentTimestamp> getSentimentOverTime() {
-        Instant past = Instant.now().minus(Duration.ofMinutes(5));
+        Instant past = Instant.now().minus(Duration.ofSeconds(30));
         return getAllSentimentOverTime().stream().filter(s ->s.getTimestamp().toInstant().isAfter(past)).collect(
                 Collectors.toList());
     }
